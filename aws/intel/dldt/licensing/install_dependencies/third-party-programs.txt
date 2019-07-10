@@ -1,0 +1,6 @@
+-----------------------------
+Third Party Attributions
+-----------------------------
+See details for Intel(R) Graphics Compute Runtime for OpenCL(TM) here: https://github.com/intel/compute-runtime
+See details for Intel(R) Media SDK for CV here: https://github.com/Intel-Media-SDK/MediaSDK
+See details for Intel(R) Media Driver for VAAPI here: https://github.com/intel/media-driver

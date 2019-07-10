@@ -1,0 +1,3 @@
+int32 forceUpdateCheck
+---
+int32 softwareUpdateState

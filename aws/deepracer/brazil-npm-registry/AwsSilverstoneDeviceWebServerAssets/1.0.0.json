@@ -1,0 +1,82 @@
+{
+  "name": "AwsSilverstoneDeviceWebServerAssets",
+  "version": "1.0.0",
+  "description": "AWS Silverstone device web server assets.",
+  "browser": "./src/index.tsx",
+  "dependencies": {
+    "AWS-UI-Components-React": "^2.1.0",
+    "axios": "^0.18.0",
+    "crc": "^3.8.0",
+    "react": "^16.8.4",
+    "react-bootstrap-slider": "^2.2.2",
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "uninstall": "0.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "@types/crc": "^3.4.0",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^6.0.11",
+    "@types/react-router-dom": "^4.3.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.4",
+    "bootstrap": "^3.4.1",
+    "css-loader": "^2.1.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "prop-types": "^15.7.2",
+    "react-hot-loader": "^4.6.3",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-thunk": "^2.3.0",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.1.5"
+  },
+  "scripts": {
+    "copy-lib": "cp -r lib build/",
+    "prod-build": "webpack --config webpack.prod.js",
+    "dev-build": "webpack --config webpack.dev.js",
+    "prepublishOnly": "npm run prod-build && npm run copy-lib",
+    "dev": "webpack --config webpack.dev.js --watch",
+    "devserver": "webpack-dev-server --config webpack.dev.js",
+    "lint": "node node_modules/tslint/bin/tslint --config ./tslint.json --project ./tsconfig.json --format verbose || exit 1",
+    "clean": "rm -rf ./build && rm -rf ./node_modules"
+  },
+  "npm-pretty-much": {
+    "https://w/?NpmPrettyMuch/UndeclaredTransitiveDependencies": true
+  },
+  "files": [
+    "lib"
+  ],
+  "readme": "# Device webserver \n\n## Development\n\n### HTML / JS / CSS only changes\n\nLeverage webpack-dev-server\n\nRun `bb devserver` and visit localhost:10080.\n\n## Polaris dependencies \n\nAWS-UI-Components-React currently does not support AL2012 build, which is required by device web server. \n\nTo integration Polaris, we manually copy `AWS-UI-Components-React` build artifact to package root, and wire in the components in `package.json`, then run `bb install -D AWS-UI-Components-React`. This is a one off effort.\n\n### Steps to download / update `AWS-UI-Components-React` \n\n* go to [AWS-UI-Components-React releases page](https://code.amazon.com/packages/AWS-UI-Components-React/releases)\n* click `artifacts` link on the right of desired release\n* navigate to `RHEL5_64` > `DEV.STD.PTHREAD` > `lib` > `commonjs`, these are the files you want to copy from\n* from terminal, run: \n   \n   ```\n   wget \"http://devtools-s3proxy-pdx.amazon.com/s3proxy/get?s3key=AWS-UI-Components-React-2.1.2170.0-RHEL5_64-DEV.STD.PTHREAD-lib.tgz\"\n   ```\n* tar -xzvf the downloaded file and copy / replace `lib/commonjs/AWS-UI-Components-React` that to package root\n* build",
+  "readmeFilename": "README.md",
+  "_id": "AwsSilverstoneDeviceWebServerAssets@1.0.0",
+  "_npmVersion": "6.4.1",
+  "_nodeVersion": "8.15.1",
+  "_npmUser": {
+    "name": "nobody",
+    "email": "nobody@amazon.com"
+  },
+  "maintainers": [
+    {
+      "name": "nobody",
+      "email": "nobody@amazon.com"
+    }
+  ],
+  "dist": {
+    "integrity": "sha512-Vu3mKXGpo96R66RImWaFn7q/faetHTREU3L0pyM8Mj7ZOPWXswQqD3VLZRQAUv2CfT/EaxQiu75cA46nXrsa8Q==",
+    "shasum": "9d2d3e46556e729d5dfdd3a5b8a184d165d66673",
+    "tarball": "brazilNpm:AwsSilverstoneDeviceWebServerAssets/1.0.0.tgz"
+  }
+}

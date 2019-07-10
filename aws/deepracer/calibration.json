@@ -1,0 +1,19 @@
+{
+   "Calibration" : 
+   {
+      "Motor" : 
+      {
+         "max" : 1700000,
+         "mid" : 1450000,
+         "min" : 1200000,
+         "polarity" : 1
+      },
+      "Servo" : 
+      {
+         "max" : 1750000,
+         "mid" : 1530000,
+         "min" : 1230000,
+         "polarity" : 1
+      }
+   }
+}

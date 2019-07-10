@@ -1,0 +1,21 @@
+
+(cl:in-package :asdf)
+
+(defsystem "software_update_pkg-srv"
+  :depends-on (:roslisp-msg-protocol :roslisp-utils )
+  :components ((:file "_package")
+    (:file "BeginSoftwareUpdateSrv" :depends-on ("_package_BeginSoftwareUpdateSrv"))
+    (:file "_package_BeginSoftwareUpdateSrv" :depends-on ("_package"))
+    (:file "ConsoleUploadModelSrv" :depends-on ("_package_ConsoleUploadModelSrv"))
+    (:file "_package_ConsoleUploadModelSrv" :depends-on ("_package"))
+    (:file "GetDeviceInfoSrv" :depends-on ("_package_GetDeviceInfoSrv"))
+    (:file "_package_GetDeviceInfoSrv" :depends-on ("_package"))
+    (:file "OTGLinkStateSrv" :depends-on ("_package_OTGLinkStateSrv"))
+    (:file "_package_OTGLinkStateSrv" :depends-on ("_package"))
+    (:file "SoftwareUpdateGetStateSrv" :depends-on ("_package_SoftwareUpdateGetStateSrv"))
+    (:file "_package_SoftwareUpdateGetStateSrv" :depends-on ("_package"))
+    (:file "SoftwareUpdateStatusSrv" :depends-on ("_package_SoftwareUpdateStatusSrv"))
+    (:file "_package_SoftwareUpdateStatusSrv" :depends-on ("_package"))
+    (:file "VerifyModelReadySrv" :depends-on ("_package_VerifyModelReadySrv"))
+    (:file "_package_VerifyModelReadySrv" :depends-on ("_package"))
+  ))

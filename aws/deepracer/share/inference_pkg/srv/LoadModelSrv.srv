@@ -1,0 +1,5 @@
+string artifactPath
+int8 taskType
+int8 preProcessType
+---
+int32 error

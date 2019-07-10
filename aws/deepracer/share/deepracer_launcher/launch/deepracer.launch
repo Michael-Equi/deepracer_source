@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="web_video_server" type="web_video_server" name="web_video_server">
+        <param name="ros_threads" value="1" />
+    </node>
+    <node name="servo_node" pkg="servo_pkg" type="servo_node" respawn="true" />
+    <node name="media_engine" pkg="media_pkg" type="media_node" respawn="true" />
+
+    <node name="inference_engine" pkg="inference_pkg" type="inference_node" respawn="true" output="screen"/>
+    <node name="model_optimizer" pkg="inference_pkg" type="model_optimizer_node.py" respawn="true" />
+
+    <node name="control_node" pkg="ctrl_pkg" type="ctrl_node" respawn="true" />
+    <node name="navigation_node" pkg="ctrl_pkg" type="navigation_node.py" respawn="true" />
+    <node name="software_update" pkg="software_update_pkg" type="software_update_process.py" respawn="true" />
+    <node name="webserver" pkg="webserver_pkg" type="webserver.py" respawn="true" />
+    <node name="battery_node" pkg="i2c_pkg" type="battery_node" respawn="true" />
+</launch>

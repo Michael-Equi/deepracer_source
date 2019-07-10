@@ -1,0 +1,9 @@
+string model_name
+string img_format
+int32 width
+int32 height
+int32 num_channels
+int32 platform
+---
+string artifactPath
+int32 hasError

@@ -1,0 +1,2 @@
+Intel(R) Graphics Compute Runtime for OpenCL(TM) is released in terms of MIT license and content is redistributable: <install_root>/install_dependencies/[intel-opencl_2018ww15-010713_amd64.deb; intel-opencl-2018ww15-010713.x86_64-igdrcl.rpm]
+Intel(R) Media SDK for CV is released in terms of MIT license and content is redistributable: <install_root>/../mediasdk/*

@@ -1,0 +1,6 @@
+is_male
+has_hat
+has_longsleeves
+has_longpants
+has_longhair
+has_coat_jacket

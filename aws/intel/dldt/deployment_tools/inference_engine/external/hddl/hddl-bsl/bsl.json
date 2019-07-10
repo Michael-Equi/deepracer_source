@@ -1,0 +1,130 @@
+{
+  
+  "active":"pch-c246",
+  "config": {
+    "gpios":[
+      {
+        "gpio": "d8",
+        "boardid": 0,
+        "deviceid":0
+      },
+      {
+        "gpio": "d7",
+        "boardid": 0,
+        "deviceid":1
+      },
+      {
+        "gpio": "d6",
+        "boardid": 0,
+        "deviceid":2
+      },
+      {
+        "gpio": "d5",
+        "boardid": 0,
+        "deviceid":3
+      },
+      {
+        "gpio": "d20",
+        "boardid": 0,
+        "deviceid":4
+      },
+      {
+        "gpio": "d19",
+        "boardid": 0,
+        "deviceid":5
+      },
+      {
+        "gpio": "d18",
+        "boardid": 0,
+        "deviceid":6
+      },
+      {
+        "gpio": "d17",
+        "boardid": 0,
+        "deviceid":7
+      },
+      {
+        "gpio": "d16",
+        "boardid": 1,
+        "deviceid":0
+      },
+      {
+        "gpio": "d15",
+        "boardid": 1,
+        "deviceid":1
+      },
+      {
+        "gpio": "d4",
+        "boardid": 1,
+        "deviceid":2
+      },
+      {
+        "gpio": "d23",
+        "boardid": 1,
+        "deviceid":3
+      },
+      {
+        "gpio": "d9",
+        "boardid": 1,
+        "deviceid":4
+      },
+      {
+        "gpio": "d10",
+        "boardid": 1,
+        "deviceid":5
+      },
+      {
+        "gpio": "d11",
+        "boardid": 1,
+        "deviceid":6
+      },
+      {
+        "gpio": "d12",
+        "boardid": 1,
+        "deviceid":7
+      },
+      {
+        "gpio": "d14",
+        "boardid": 2,
+        "deviceid":0
+      },
+      {
+        "gpio": "d13",
+        "boardid": 2,
+        "deviceid":1
+      },
+      {
+        "gpio": "a23",
+        "boardid": 2,
+        "deviceid":2
+      },
+      {
+        "gpio": "a22",
+        "boardid": 2,
+        "deviceid":3
+      },
+      {
+        "gpio": "a21",
+        "boardid": 2,
+        "deviceid":4
+      },
+      {
+        "gpio": "a20",
+        "boardid": 2,
+        "deviceid":5
+      },
+      {
+        "gpio": "a19",
+        "boardid": 2,
+        "deviceid":6
+      },
+      {
+        "gpio": "a18",
+        "boardid": 2,
+        "deviceid":7
+      }
+    ]
+    
+  }
+  
+}

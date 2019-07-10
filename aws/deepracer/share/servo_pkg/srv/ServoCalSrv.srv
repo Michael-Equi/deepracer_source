@@ -1,0 +1,7 @@
+int32 calType
+int32 max
+int32 mid
+int32 min
+int32 polarity
+---
+int32 error

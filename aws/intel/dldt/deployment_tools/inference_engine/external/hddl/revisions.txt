@@ -1,0 +1,4 @@
+hddl-mvnc: cfb017a1e6b18e379efc4c9ae754586e1ff8485c
+hddl-bsl: 6d623f7cfe94fe52fe8712a58bf2adeec27c8df7
+hddl-service-merged: 0719f5667cafcc91e38f4c1393ddc68cf4ddf3f8
+hddl-drivers: 76f7650ff7c2ad49ff46444455252fa96f9a66a8

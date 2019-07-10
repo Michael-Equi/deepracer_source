@@ -1,0 +1,1856 @@
+<net name="cnn_fd_004_sq_light_ssd" version="2" batch="1">
+    <layers>
+        <layer name="data" type="Input" precision="FP32" id="0">
+            <output>
+                <port id="0">
+                    <dim>1</dim>
+                    <dim>3</dim>
+                    <dim>300</dim>
+                    <dim>300</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Scale1" type="ScaleShift" precision="FP32" id="2">
+            <input>
+                <port id="2">
+                    <dim>1</dim>
+                    <dim>3</dim>
+                    <dim>300</dim>
+                    <dim>300</dim>
+                </port>
+            </input>
+            <output>
+                <port id="3">
+                    <dim>1</dim>
+                    <dim>3</dim>
+                    <dim>300</dim>
+                    <dim>300</dim>
+                </port>
+            </output>
+            <weights offset="0" size="12"/>
+            <biases offset="12" size="12"/>
+        </layer>
+        <layer name="Convolution1" type="Convolution" precision="FP32" id="3">
+            <convolution_data stride-x="2" stride-y="2" pad-x="3" pad-y="3" kernel-x="7" kernel-y="7" output="32" group="1"/>
+            <input>
+                <port id="4">
+                    <dim>1</dim>
+                    <dim>3</dim>
+                    <dim>300</dim>
+                    <dim>300</dim>
+                </port>
+            </input>
+            <output>
+                <port id="5">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>150</dim>
+                    <dim>150</dim>
+                </port>
+            </output>
+            <weights offset="24" size="18816"/>
+            <biases offset="18840" size="128"/>
+        </layer>
+        <layer name="ReLU1" type="ReLU" precision="FP32" id="4">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="6">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>150</dim>
+                    <dim>150</dim>
+                </port>
+            </input>
+            <output>
+                <port id="7">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>150</dim>
+                    <dim>150</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Pooling1" type="Pooling" precision="FP32" id="5">
+            <pooling_data kernel-x="3" kernel-y="3" pad-x="0" pad-y="0" stride-x="2" stride-y="2" rounding-type="ceil" pool-method="max"/>
+            <input>
+                <port id="8">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>150</dim>
+                    <dim>150</dim>
+                </port>
+            </input>
+            <output>
+                <port id="9">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire2_squeeze1x1" type="Convolution" precision="FP32" id="6">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="8" group="1"/>
+            <input>
+                <port id="10">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="11">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="18968" size="1024"/>
+            <biases offset="19992" size="32"/>
+        </layer>
+        <layer name="fire2_relu_squeeze1x1" type="ReLU" precision="FP32" id="7">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="12">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="13">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire2_expand3x3" type="Convolution" precision="FP32" id="10">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="32" group="1"/>
+            <input>
+                <port id="18">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="19">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="20024" size="9216"/>
+            <biases offset="29240" size="128"/>
+        </layer>
+        <layer name="fire2_relu_expand3x3" type="ReLU" precision="FP32" id="11">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="20">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="21">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire2_expand1x1" type="Convolution" precision="FP32" id="8">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="32" group="1"/>
+            <input>
+                <port id="14">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="15">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="29368" size="1024"/>
+            <biases offset="30392" size="128"/>
+        </layer>
+        <layer name="fire2_relu_expand1x1" type="ReLU" precision="FP32" id="9">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="16">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="17">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat1" type="Concat" precision="FP32" id="12">
+            <concat_data axis="1"/>
+            <input>
+                <port id="22">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+                <port id="23">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="24">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire3_squeeze1x1" type="Convolution" precision="FP32" id="13">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="8" group="1"/>
+            <input>
+                <port id="25">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="26">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="30520" size="2048"/>
+            <biases offset="32568" size="32"/>
+        </layer>
+        <layer name="fire3_relu_squeeze1x1" type="ReLU" precision="FP32" id="14">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="27">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="28">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire3_expand3x3" type="Convolution" precision="FP32" id="17">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="32" group="1"/>
+            <input>
+                <port id="33">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="34">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="32600" size="9216"/>
+            <biases offset="41816" size="128"/>
+        </layer>
+        <layer name="fire3_relu_expand3x3" type="ReLU" precision="FP32" id="18">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="35">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="36">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire3_expand1x1" type="Convolution" precision="FP32" id="15">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="32" group="1"/>
+            <input>
+                <port id="29">
+                    <dim>1</dim>
+                    <dim>8</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="30">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="41944" size="1024"/>
+            <biases offset="42968" size="128"/>
+        </layer>
+        <layer name="fire3_relu_expand1x1" type="ReLU" precision="FP32" id="16">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="31">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="32">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat2" type="Concat" precision="FP32" id="19">
+            <concat_data axis="1"/>
+            <input>
+                <port id="37">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+                <port id="38">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="39">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire4_squeeze1x1" type="Convolution" precision="FP32" id="20">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="16" group="1"/>
+            <input>
+                <port id="40">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="41">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="43096" size="4096"/>
+            <biases offset="47192" size="64"/>
+        </layer>
+        <layer name="fire4_relu_squeeze1x1" type="ReLU" precision="FP32" id="21">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="42">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="43">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire4_expand3x3" type="Convolution" precision="FP32" id="24">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="64" group="1"/>
+            <input>
+                <port id="48">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="49">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="47256" size="36864"/>
+            <biases offset="84120" size="256"/>
+        </layer>
+        <layer name="fire4_relu_expand3x3" type="ReLU" precision="FP32" id="25">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="50">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="51">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire4_expand1x1" type="Convolution" precision="FP32" id="22">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="64" group="1"/>
+            <input>
+                <port id="44">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="45">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+            <weights offset="84376" size="4096"/>
+            <biases offset="88472" size="256"/>
+        </layer>
+        <layer name="fire4_relu_expand1x1" type="ReLU" precision="FP32" id="23">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="46">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="47">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat3" type="Concat" precision="FP32" id="26">
+            <concat_data axis="1"/>
+            <input>
+                <port id="52">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+                <port id="53">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="54">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire5_squeeze1x1" type="Convolution" precision="FP32" id="27">
+            <convolution_data stride-x="2" stride-y="2" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="16" group="1"/>
+            <input>
+                <port id="55">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>75</dim>
+                    <dim>75</dim>
+                </port>
+            </input>
+            <output>
+                <port id="56">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="88728" size="8192"/>
+            <biases offset="96920" size="64"/>
+        </layer>
+        <layer name="fire5_relu_squeeze1x1" type="ReLU" precision="FP32" id="28">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="57">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="58">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire5_expand3x3" type="Convolution" precision="FP32" id="31">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="64" group="1"/>
+            <input>
+                <port id="63">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="64">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="96984" size="36864"/>
+            <biases offset="133848" size="256"/>
+        </layer>
+        <layer name="fire5_relu_expand3x3" type="ReLU" precision="FP32" id="32">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="65">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="66">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire5_expand1x1" type="Convolution" precision="FP32" id="29">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="64" group="1"/>
+            <input>
+                <port id="59">
+                    <dim>1</dim>
+                    <dim>16</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="60">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="134104" size="4096"/>
+            <biases offset="138200" size="256"/>
+        </layer>
+        <layer name="fire5_relu_expand1x1" type="ReLU" precision="FP32" id="30">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="61">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="62">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat4" type="Concat" precision="FP32" id="33">
+            <concat_data axis="1"/>
+            <input>
+                <port id="67">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+                <port id="68">
+                    <dim>1</dim>
+                    <dim>64</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="69">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire6_squeeze1x1" type="Convolution" precision="FP32" id="34">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="24" group="1"/>
+            <input>
+                <port id="70">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="71">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="138456" size="12288"/>
+            <biases offset="150744" size="96"/>
+        </layer>
+        <layer name="fire6_relu_squeeze1x1" type="ReLU" precision="FP32" id="35">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="72">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="73">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire6_expand3x3" type="Convolution" precision="FP32" id="38">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="96" group="1"/>
+            <input>
+                <port id="78">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="79">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="150840" size="82944"/>
+            <biases offset="233784" size="384"/>
+        </layer>
+        <layer name="fire6_relu_expand3x3" type="ReLU" precision="FP32" id="39">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="80">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="81">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire6_expand1x1" type="Convolution" precision="FP32" id="36">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="96" group="1"/>
+            <input>
+                <port id="74">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="75">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="234168" size="9216"/>
+            <biases offset="243384" size="384"/>
+        </layer>
+        <layer name="fire6_relu_expand1x1" type="ReLU" precision="FP32" id="37">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="76">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="77">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat5" type="Concat" precision="FP32" id="40">
+            <concat_data axis="1"/>
+            <input>
+                <port id="82">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+                <port id="83">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="84">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire7_squeeze1x1" type="Convolution" precision="FP32" id="41">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="24" group="1"/>
+            <input>
+                <port id="85">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="86">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="243768" size="18432"/>
+            <biases offset="262200" size="96"/>
+        </layer>
+        <layer name="fire7_relu_squeeze1x1" type="ReLU" precision="FP32" id="42">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="87">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="88">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire7_expand3x3" type="Convolution" precision="FP32" id="45">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="96" group="1"/>
+            <input>
+                <port id="93">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="94">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="262296" size="82944"/>
+            <biases offset="345240" size="384"/>
+        </layer>
+        <layer name="fire7_relu_expand3x3" type="ReLU" precision="FP32" id="46">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="95">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="96">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire7_expand1x1" type="Convolution" precision="FP32" id="43">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="96" group="1"/>
+            <input>
+                <port id="89">
+                    <dim>1</dim>
+                    <dim>24</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="90">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="345624" size="9216"/>
+            <biases offset="354840" size="384"/>
+        </layer>
+        <layer name="fire7_relu_expand1x1" type="ReLU" precision="FP32" id="44">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="91">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="92">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat6" type="Concat" precision="FP32" id="47">
+            <concat_data axis="1"/>
+            <input>
+                <port id="97">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+                <port id="98">
+                    <dim>1</dim>
+                    <dim>96</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="99">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire8_squeeze1x1" type="Convolution" precision="FP32" id="48">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="32" group="1"/>
+            <input>
+                <port id="100">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="101">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="355224" size="24576"/>
+            <biases offset="379800" size="128"/>
+        </layer>
+        <layer name="fire8_relu_squeeze1x1" type="ReLU" precision="FP32" id="49">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="102">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="103">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire8_expand3x3" type="Convolution" precision="FP32" id="52">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="128" group="1"/>
+            <input>
+                <port id="108">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="109">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="379928" size="147456"/>
+            <biases offset="527384" size="512"/>
+        </layer>
+        <layer name="fire8_relu_expand3x3" type="ReLU" precision="FP32" id="53">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="110">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="111">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire8_expand1x1" type="Convolution" precision="FP32" id="50">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="128" group="1"/>
+            <input>
+                <port id="104">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="105">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+            <weights offset="527896" size="16384"/>
+            <biases offset="544280" size="512"/>
+        </layer>
+        <layer name="fire8_relu_expand1x1" type="ReLU" precision="FP32" id="51">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="106">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="107">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat7" type="Concat" precision="FP32" id="54">
+            <concat_data axis="1"/>
+            <input>
+                <port id="112">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+                <port id="113">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="114">
+                    <dim>1</dim>
+                    <dim>256</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire9_squeeze1x1" type="Convolution" precision="FP32" id="55">
+            <convolution_data stride-x="2" stride-y="2" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="32" group="1"/>
+            <input>
+                <port id="115">
+                    <dim>1</dim>
+                    <dim>256</dim>
+                    <dim>38</dim>
+                    <dim>38</dim>
+                </port>
+            </input>
+            <output>
+                <port id="116">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="544792" size="32768"/>
+            <biases offset="577560" size="128"/>
+        </layer>
+        <layer name="fire9_relu_squeeze1x1" type="ReLU" precision="FP32" id="56">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="117">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="118">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire9_expand3x3" type="Convolution" precision="FP32" id="59">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="128" group="1"/>
+            <input>
+                <port id="123">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="124">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="577688" size="147456"/>
+            <biases offset="725144" size="512"/>
+        </layer>
+        <layer name="fire9_relu_expand3x3" type="ReLU" precision="FP32" id="60">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="125">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="126">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire9_expand1x1" type="Convolution" precision="FP32" id="57">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="128" group="1"/>
+            <input>
+                <port id="119">
+                    <dim>1</dim>
+                    <dim>32</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="120">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="725656" size="16384"/>
+            <biases offset="742040" size="512"/>
+        </layer>
+        <layer name="fire9_relu_expand1x1" type="ReLU" precision="FP32" id="58">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="121">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="122">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat8" type="Concat" precision="FP32" id="61">
+            <concat_data axis="1"/>
+            <input>
+                <port id="127">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+                <port id="128">
+                    <dim>1</dim>
+                    <dim>128</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="129">
+                    <dim>1</dim>
+                    <dim>256</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire10_squeeze1x1" type="Convolution" precision="FP32" id="62">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="48" group="1"/>
+            <input>
+                <port id="130">
+                    <dim>1</dim>
+                    <dim>256</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="131">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="742552" size="49152"/>
+            <biases offset="791704" size="192"/>
+        </layer>
+        <layer name="fire10_relu_squeeze1x1" type="ReLU" precision="FP32" id="63">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="132">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="133">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire10_expand3x3" type="Convolution" precision="FP32" id="66">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="192" group="1"/>
+            <input>
+                <port id="138">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="139">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="791896" size="331776"/>
+            <biases offset="1123672" size="768"/>
+        </layer>
+        <layer name="fire10_relu_expand3x3" type="ReLU" precision="FP32" id="67">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="140">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="141">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire10_expand1x1" type="Convolution" precision="FP32" id="64">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="192" group="1"/>
+            <input>
+                <port id="134">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="135">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="1124440" size="36864"/>
+            <biases offset="1161304" size="768"/>
+        </layer>
+        <layer name="fire10_relu_expand1x1" type="ReLU" precision="FP32" id="65">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="136">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="137">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat9" type="Concat" precision="FP32" id="68">
+            <concat_data axis="1"/>
+            <input>
+                <port id="142">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+                <port id="143">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="144">
+                    <dim>1</dim>
+                    <dim>384</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire11_squeeze1x1" type="Convolution" precision="FP32" id="69">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="48" group="1"/>
+            <input>
+                <port id="145">
+                    <dim>1</dim>
+                    <dim>384</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="146">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="1162072" size="73728"/>
+            <biases offset="1235800" size="192"/>
+        </layer>
+        <layer name="fire11_relu_squeeze1x1" type="ReLU" precision="FP32" id="70">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="147">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="148">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire11_expand3x3" type="Convolution" precision="FP32" id="73">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="192" group="1"/>
+            <input>
+                <port id="153">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="154">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="1235992" size="331776"/>
+            <biases offset="1567768" size="768"/>
+        </layer>
+        <layer name="fire11_relu_expand3x3" type="ReLU" precision="FP32" id="74">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="155">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="156">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fire11_expand1x1" type="Convolution" precision="FP32" id="71">
+            <convolution_data stride-x="1" stride-y="1" pad-x="0" pad-y="0" kernel-x="1" kernel-y="1" output="192" group="1"/>
+            <input>
+                <port id="149">
+                    <dim>1</dim>
+                    <dim>48</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="150">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="1568536" size="36864"/>
+            <biases offset="1605400" size="768"/>
+        </layer>
+        <layer name="fire11_relu_expand1x1" type="ReLU" precision="FP32" id="72">
+            <data negative_slope="0" engine="caffe.ReLUParameter.DEFAULT"/>
+            <input>
+                <port id="151">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="152">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="Concat10" type="Concat" precision="FP32" id="75">
+            <concat_data axis="1"/>
+            <input>
+                <port id="157">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+                <port id="158">
+                    <dim>1</dim>
+                    <dim>192</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="159">
+                    <dim>1</dim>
+                    <dim>384</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fc7_mbox_priorbox" type="PriorBoxClustered" precision="FP32" id="82">
+            <data min_size="" max_size="" aspect_ratio="" flip="1" clip="0" variance="0.100000,0.100000,0.200000,0.200000" img_size="0" img_h="0" img_w="0" step="16" step_h="0" step_w="0" offset="0.5" width="9.400000,25.100000,14.700000,34.700001,143.000000,77.400002,128.800003,51.099998,75.599998" height="15.000000,39.599998,25.500000,63.200001,227.500000,162.899994,124.500000,105.099998,72.599998"/>
+            <input>
+                <port id="172">
+                    <dim>1</dim>
+                    <dim>384</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+                <port id="173">
+                    <dim>1</dim>
+                    <dim>3</dim>
+                    <dim>300</dim>
+                    <dim>300</dim>
+                </port>
+            </input>
+            <output>
+                <port id="174">
+                    <dim>1</dim>
+                    <dim>2</dim>
+                    <dim>12996</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fc7_mbox_conf" type="Convolution" precision="FP32" id="79">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="18" group="1"/>
+            <input>
+                <port id="166">
+                    <dim>1</dim>
+                    <dim>384</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="167">
+                    <dim>1</dim>
+                    <dim>18</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="1606168" size="248832"/>
+            <biases offset="1855000" size="72"/>
+        </layer>
+        <layer name="fc7_mbox_conf_perm" type="Permute" precision="FP32" id="80">
+            <data order="0,2,3,1"/>
+            <input>
+                <port id="168">
+                    <dim>1</dim>
+                    <dim>18</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="169">
+                    <dim>1</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                    <dim>18</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fc7_mbox_conf_flat" type="Flatten" precision="FP32" id="81">
+            <data axis="1" end_axis="-1"/>
+            <input>
+                <port id="170">
+                    <dim>1</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                    <dim>18</dim>
+                </port>
+            </input>
+            <output>
+                <port id="171">
+                    <dim>1</dim>
+                    <dim>6498</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="mbox_conf_reshape" type="Reshape" precision="FP32" id="83">
+            <data dim="0,-1,2" axis="0" num_axes="-1"/>
+            <input>
+                <port id="175">
+                    <dim>1</dim>
+                    <dim>6498</dim>
+                </port>
+            </input>
+            <output>
+                <port id="176">
+                    <dim>1</dim>
+                    <dim>3249</dim>
+                    <dim>2</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="mbox_conf_softmax" type="SoftMax" precision="FP32" id="84">
+            <softmax_data axis="2"/>
+            <input>
+                <port id="177">
+                    <dim>1</dim>
+                    <dim>3249</dim>
+                    <dim>2</dim>
+                </port>
+            </input>
+            <output>
+                <port id="178">
+                    <dim>1</dim>
+                    <dim>3249</dim>
+                    <dim>2</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="mbox_conf_flatten" type="Flatten" precision="FP32" id="85">
+            <data axis="1" end_axis="-1"/>
+            <input>
+                <port id="179">
+                    <dim>1</dim>
+                    <dim>3249</dim>
+                    <dim>2</dim>
+                </port>
+            </input>
+            <output>
+                <port id="180">
+                    <dim>1</dim>
+                    <dim>6498</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fc7_mbox_loc" type="Convolution" precision="FP32" id="76">
+            <convolution_data stride-x="1" stride-y="1" pad-x="1" pad-y="1" kernel-x="3" kernel-y="3" output="36" group="1"/>
+            <input>
+                <port id="160">
+                    <dim>1</dim>
+                    <dim>384</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="161">
+                    <dim>1</dim>
+                    <dim>36</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </output>
+            <weights offset="1855072" size="497664"/>
+            <biases offset="2352736" size="144"/>
+        </layer>
+        <layer name="fc7_mbox_loc_perm" type="Permute" precision="FP32" id="77">
+            <data order="0,2,3,1"/>
+            <input>
+                <port id="162">
+                    <dim>1</dim>
+                    <dim>36</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                </port>
+            </input>
+            <output>
+                <port id="163">
+                    <dim>1</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                    <dim>36</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="fc7_mbox_loc_flat" type="Flatten" precision="FP32" id="78">
+            <data axis="1" end_axis="-1"/>
+            <input>
+                <port id="164">
+                    <dim>1</dim>
+                    <dim>19</dim>
+                    <dim>19</dim>
+                    <dim>36</dim>
+                </port>
+            </input>
+            <output>
+                <port id="165">
+                    <dim>1</dim>
+                    <dim>12996</dim>
+                </port>
+            </output>
+        </layer>
+        <layer name="detection_out" type="DetectionOutput" precision="FP32" id="86">
+            <data num_classes="2" share_location="1" background_label_id="0" nms_threshold="0.45" top_k="400" eta="1" output_directory="" output_name_prefix="" output_format="" label_map_file="" name_size_file="" num_test_image="0" prob="1" resize_mode="caffe.ResizeParameter.WARP" height="0" width="0" height_scale="0" width_scale="0" pad_mode="caffe.ResizeParameter.CONSTANT" pad_value="" interp_mode="" code_type="caffe.PriorBoxParameter.CENTER_SIZE" variance_encoded_in_target="0" keep_top_k="200" confidence_threshold="0.01" visualize="0" visualize_threshold="0" save_file="" input_width="-1" input_height="-1" normalized="1"/>
+            <input>
+                <port id="181">
+                    <dim>1</dim>
+                    <dim>12996</dim>
+                </port>
+                <port id="182">
+                    <dim>1</dim>
+                    <dim>6498</dim>
+                </port>
+                <port id="183">
+                    <dim>1</dim>
+                    <dim>2</dim>
+                    <dim>12996</dim>
+                </port>
+            </input>
+            <output>
+                <port id="184">
+                    <dim>1</dim>
+                    <dim>1</dim>
+                    <dim>200</dim>
+                    <dim>7</dim>
+                </port>
+            </output>
+        </layer>
+    </layers>
+    <edges>
+        <edge from-layer="0" from-port="0" to-layer="2" to-port="2"/>
+        <edge from-layer="2" from-port="3" to-layer="3" to-port="4"/>
+        <edge from-layer="3" from-port="5" to-layer="4" to-port="6"/>
+        <edge from-layer="4" from-port="7" to-layer="5" to-port="8"/>
+        <edge from-layer="5" from-port="9" to-layer="6" to-port="10"/>
+        <edge from-layer="6" from-port="11" to-layer="7" to-port="12"/>
+        <edge from-layer="7" from-port="13" to-layer="8" to-port="14"/>
+        <edge from-layer="8" from-port="15" to-layer="9" to-port="16"/>
+        <edge from-layer="7" from-port="13" to-layer="10" to-port="18"/>
+        <edge from-layer="10" from-port="19" to-layer="11" to-port="20"/>
+        <edge from-layer="11" from-port="21" to-layer="12" to-port="22"/>
+        <edge from-layer="9" from-port="17" to-layer="12" to-port="23"/>
+        <edge from-layer="12" from-port="24" to-layer="13" to-port="25"/>
+        <edge from-layer="13" from-port="26" to-layer="14" to-port="27"/>
+        <edge from-layer="14" from-port="28" to-layer="15" to-port="29"/>
+        <edge from-layer="15" from-port="30" to-layer="16" to-port="31"/>
+        <edge from-layer="14" from-port="28" to-layer="17" to-port="33"/>
+        <edge from-layer="17" from-port="34" to-layer="18" to-port="35"/>
+        <edge from-layer="18" from-port="36" to-layer="19" to-port="37"/>
+        <edge from-layer="16" from-port="32" to-layer="19" to-port="38"/>
+        <edge from-layer="19" from-port="39" to-layer="20" to-port="40"/>
+        <edge from-layer="20" from-port="41" to-layer="21" to-port="42"/>
+        <edge from-layer="21" from-port="43" to-layer="22" to-port="44"/>
+        <edge from-layer="22" from-port="45" to-layer="23" to-port="46"/>
+        <edge from-layer="21" from-port="43" to-layer="24" to-port="48"/>
+        <edge from-layer="24" from-port="49" to-layer="25" to-port="50"/>
+        <edge from-layer="25" from-port="51" to-layer="26" to-port="52"/>
+        <edge from-layer="23" from-port="47" to-layer="26" to-port="53"/>
+        <edge from-layer="26" from-port="54" to-layer="27" to-port="55"/>
+        <edge from-layer="27" from-port="56" to-layer="28" to-port="57"/>
+        <edge from-layer="28" from-port="58" to-layer="29" to-port="59"/>
+        <edge from-layer="29" from-port="60" to-layer="30" to-port="61"/>
+        <edge from-layer="28" from-port="58" to-layer="31" to-port="63"/>
+        <edge from-layer="31" from-port="64" to-layer="32" to-port="65"/>
+        <edge from-layer="32" from-port="66" to-layer="33" to-port="67"/>
+        <edge from-layer="30" from-port="62" to-layer="33" to-port="68"/>
+        <edge from-layer="33" from-port="69" to-layer="34" to-port="70"/>
+        <edge from-layer="34" from-port="71" to-layer="35" to-port="72"/>
+        <edge from-layer="35" from-port="73" to-layer="36" to-port="74"/>
+        <edge from-layer="36" from-port="75" to-layer="37" to-port="76"/>
+        <edge from-layer="35" from-port="73" to-layer="38" to-port="78"/>
+        <edge from-layer="38" from-port="79" to-layer="39" to-port="80"/>
+        <edge from-layer="39" from-port="81" to-layer="40" to-port="82"/>
+        <edge from-layer="37" from-port="77" to-layer="40" to-port="83"/>
+        <edge from-layer="40" from-port="84" to-layer="41" to-port="85"/>
+        <edge from-layer="41" from-port="86" to-layer="42" to-port="87"/>
+        <edge from-layer="42" from-port="88" to-layer="43" to-port="89"/>
+        <edge from-layer="43" from-port="90" to-layer="44" to-port="91"/>
+        <edge from-layer="42" from-port="88" to-layer="45" to-port="93"/>
+        <edge from-layer="45" from-port="94" to-layer="46" to-port="95"/>
+        <edge from-layer="46" from-port="96" to-layer="47" to-port="97"/>
+        <edge from-layer="44" from-port="92" to-layer="47" to-port="98"/>
+        <edge from-layer="47" from-port="99" to-layer="48" to-port="100"/>
+        <edge from-layer="48" from-port="101" to-layer="49" to-port="102"/>
+        <edge from-layer="49" from-port="103" to-layer="50" to-port="104"/>
+        <edge from-layer="50" from-port="105" to-layer="51" to-port="106"/>
+        <edge from-layer="49" from-port="103" to-layer="52" to-port="108"/>
+        <edge from-layer="52" from-port="109" to-layer="53" to-port="110"/>
+        <edge from-layer="53" from-port="111" to-layer="54" to-port="112"/>
+        <edge from-layer="51" from-port="107" to-layer="54" to-port="113"/>
+        <edge from-layer="54" from-port="114" to-layer="55" to-port="115"/>
+        <edge from-layer="55" from-port="116" to-layer="56" to-port="117"/>
+        <edge from-layer="56" from-port="118" to-layer="57" to-port="119"/>
+        <edge from-layer="57" from-port="120" to-layer="58" to-port="121"/>
+        <edge from-layer="56" from-port="118" to-layer="59" to-port="123"/>
+        <edge from-layer="59" from-port="124" to-layer="60" to-port="125"/>
+        <edge from-layer="60" from-port="126" to-layer="61" to-port="127"/>
+        <edge from-layer="58" from-port="122" to-layer="61" to-port="128"/>
+        <edge from-layer="61" from-port="129" to-layer="62" to-port="130"/>
+        <edge from-layer="62" from-port="131" to-layer="63" to-port="132"/>
+        <edge from-layer="63" from-port="133" to-layer="64" to-port="134"/>
+        <edge from-layer="64" from-port="135" to-layer="65" to-port="136"/>
+        <edge from-layer="63" from-port="133" to-layer="66" to-port="138"/>
+        <edge from-layer="66" from-port="139" to-layer="67" to-port="140"/>
+        <edge from-layer="67" from-port="141" to-layer="68" to-port="142"/>
+        <edge from-layer="65" from-port="137" to-layer="68" to-port="143"/>
+        <edge from-layer="68" from-port="144" to-layer="69" to-port="145"/>
+        <edge from-layer="69" from-port="146" to-layer="70" to-port="147"/>
+        <edge from-layer="70" from-port="148" to-layer="71" to-port="149"/>
+        <edge from-layer="71" from-port="150" to-layer="72" to-port="151"/>
+        <edge from-layer="70" from-port="148" to-layer="73" to-port="153"/>
+        <edge from-layer="73" from-port="154" to-layer="74" to-port="155"/>
+        <edge from-layer="74" from-port="156" to-layer="75" to-port="157"/>
+        <edge from-layer="72" from-port="152" to-layer="75" to-port="158"/>
+        <edge from-layer="75" from-port="159" to-layer="76" to-port="160"/>
+        <edge from-layer="76" from-port="161" to-layer="77" to-port="162"/>
+        <edge from-layer="77" from-port="163" to-layer="78" to-port="164"/>
+        <edge from-layer="75" from-port="159" to-layer="79" to-port="166"/>
+        <edge from-layer="79" from-port="167" to-layer="80" to-port="168"/>
+        <edge from-layer="80" from-port="169" to-layer="81" to-port="170"/>
+        <edge from-layer="75" from-port="159" to-layer="82" to-port="172"/>
+        <edge from-layer="2" from-port="3" to-layer="82" to-port="173"/>
+        <edge from-layer="81" from-port="171" to-layer="83" to-port="175"/>
+        <edge from-layer="83" from-port="176" to-layer="84" to-port="177"/>
+        <edge from-layer="84" from-port="178" to-layer="85" to-port="179"/>
+        <edge from-layer="78" from-port="165" to-layer="86" to-port="181"/>
+        <edge from-layer="85" from-port="180" to-layer="86" to-port="182"/>
+        <edge from-layer="82" from-port="174" to-layer="86" to-port="183"/>
+    </edges>
+</net>

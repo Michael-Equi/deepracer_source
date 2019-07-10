@@ -1,0 +1,75 @@
+#
+# Default server configuration
+#
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    return 302 https://$http_host;
+}
+
+server {
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+    include snippets/self-signed.conf;
+
+    root /opt/aws/deepracer/lib/webserver_pkg/;
+    server_name webserver;
+
+    location /static/ {
+        allow all;
+    }
+
+    location = /redirect_login {
+        proxy_pass http://0.0.0.0:5001/redirect_login;
+    }
+
+    location = /favicon.ico {
+        log_not_found off;
+    }
+
+    location /login {
+        auth_request_set $user $upstream_http_x_forwarded_user;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-User $user;
+        proxy_pass http://0.0.0.0:5001/login;
+    }
+
+    location =/ {
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-User $user;
+        proxy_pass http://0.0.0.0:5001/;
+    }
+
+    location /route {
+        auth_request /auth;
+        proxy_pass http://127.0.0.1:8080/stream;
+    }
+
+    location / {
+        auth_request /auth;
+        error_page 401 = @error401;
+
+        auth_request_set $user $upstream_http_x_forwarded_user;
+        proxy_set_header X-Forwarded-User $user;
+        proxy_pass http://0.0.0.0:5001/;
+
+        proxy_set_header Connection '';
+        proxy_http_version 1.1;
+        chunked_transfer_encoding off;
+        proxy_buffering off;
+        proxy_cache off;
+    }
+
+    location /auth {
+        internal;
+        proxy_pass_request_body off;
+        proxy_set_header Host $host;
+        proxy_set_header Content-Length "";
+        proxy_pass http://0.0.0.0:5001/auth;
+    }
+
+    location @error401 {
+        return 302 /redirect_login;
+    }
+}

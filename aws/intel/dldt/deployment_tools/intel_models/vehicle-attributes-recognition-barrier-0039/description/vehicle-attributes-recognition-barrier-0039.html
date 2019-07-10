@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+<link rel="stylesheet" href="../..//intel_styles.css" type="text/css" />
+</head>
+<body>
+<div id="banner">
+    <div id="bannerblock">
+      <img src="../..//intel_logo.png" class="intellogo">
+      <h1 class="title">Overview of OpenVINO&trade; toolkit Pre-trained Models</h1>
+    </div>
+  </div>
+<div id="contentblock">
+<h1 id="vehicle-attributes-recognition-barrier-0039">vehicle-attributes-recognition-barrier-0039</h1>
+<h2 id="use-case-and-high-level-description">Use Case and High-Level Description</h2>
+<p>This model presents a vehicle attributes classification algorithm for a traffic analysis scenario.</p>
+<h2 id="example">Example</h2>
+<div class="figure">
+<img src="./vehicle-attributes-recognition-barrier-0039-1.png" />
+
+</div>
+<h2 id="specification">Specification</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Metric</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Car pose</td>
+<td align="left">Front facing cars</td>
+</tr>
+<tr class="even">
+<td align="left">Occlusion coverage</td>
+<td align="left">&lt;50%</td>
+</tr>
+<tr class="odd">
+<td align="left">Min object width</td>
+<td align="left">72 pixels</td>
+</tr>
+<tr class="even">
+<td align="left">Supported colors</td>
+<td align="left">White, gray, yellow, red, green, blue, black</td>
+</tr>
+<tr class="odd">
+<td align="left">Supported types</td>
+<td align="left">Car, bus, truck, van</td>
+</tr>
+<tr class="even">
+<td align="left">GFlops</td>
+<td align="left">0.126</td>
+</tr>
+<tr class="odd">
+<td align="left">MParams</td>
+<td align="left">0.626</td>
+</tr>
+<tr class="even">
+<td align="left">Source framework</td>
+<td align="left">Caffe*</td>
+</tr>
+</tbody>
+</table>
+<h2 id="accuracy---confusion-matrix">Accuracy - Confusion Matrix</h2>
+<div class="figure">
+<img src="./vehicle-attributes-recognition-barrier-0039-2.png" />
+
+</div>
+<h2 id="performance">Performance</h2>
+<p>Link to <a href="https://software.intel.com/en-us/openvino-toolkit/benchmarks">performance table</a></p>
+<h2 id="inputs">Inputs</h2>
+<ol style="list-style-type: decimal">
+<li><p>name: &quot;input&quot; , shape: [1x3x72x72] - An input image in following format [1xCxHxW], where:</p>
+<ul>
+<li>C - number of channels</li>
+<li>H - image height</li>
+<li>W - image width.</li>
+</ul></li>
+</ol>
+<p>Expected color order - BGR.</p>
+<h2 id="outputs">Outputs</h2>
+<ol style="list-style-type: decimal">
+<li>name: &quot;color&quot;, shape: [1, 7, 1, 1] - Softmax output across seven color classes [white, gray, yellow, red, green, blue, black]</li>
+<li>name: &quot;type&quot;, shape: [1, 4, 1, 1] - Softmax output across four type classes [car, bus, truck, van]</li>
+</ol>
+<h2 id="legal-information">Legal Information</h2>
+<p>[*] Other names and brands may be claimed as the property of others.</p>
+</div>
+</body>
+</html>

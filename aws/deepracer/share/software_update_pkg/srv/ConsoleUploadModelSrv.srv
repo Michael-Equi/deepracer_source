@@ -1,0 +1,4 @@
+string modelPath
+int32  upload
+---
+string status
